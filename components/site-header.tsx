@@ -1,12 +1,22 @@
 'use client'
 
 import Link from 'next/link'
-import { useState } from 'react'
+import { useState, type ReactNode } from 'react'
+
+const NAV_LINKS = [
+  { href: '/leistungen', label: 'Leistungen' },
+  { href: '/rechner', label: 'Förder-Check' },
+  { href: '/effizienz-rechner', label: 'Effizienz-Rechner' },
+  { href: '/kontakt', label: 'Kontakt' },
+  { href: '/rechtliches', label: 'Rechtliches' },
+]
 
 export function SiteHeader() {
   const [open, setOpen] = useState(false)
 
   const closeMenu = () => setOpen(false)
+
+  const navClass = open ? 'site-nav is-open' : 'site-nav'
 
   return (
     <header className="site-header">
@@ -26,28 +36,15 @@ export function SiteHeader() {
         </Link>
 
         <nav
-          className={`site-nav ${open ? 'is-open' : ''}`}
+          className={navClass}
+          id="mobile-navigation"
           aria-label="Hauptnavigation"
         >
-          <Link href="/leistungen" onClick={closeMenu}>
-            Leistungen
-          </Link>
-
-          <Link href="/rechner" onClick={closeMenu}>
-            Förder-Check
-          </Link>
-
-          <Link href="/effizienz-rechner" onClick={closeMenu}>
-            Effizienz-Rechner
-          </Link>
-
-          <Link href="/kontakt" onClick={closeMenu}>
-            Kontakt
-          </Link>
-
-          <Link href="/rechtliches" onClick={closeMenu}>
-            Rechtliches
-          </Link>
+          {NAV_LINKS.map(link => (
+            <Link key={link.href} href={link.href} onClick={closeMenu}>
+              {link.label}
+            </Link>
+          ))}
         </nav>
 
         <a className="header-contact" href="mailto:kontakt@example.de">
@@ -68,5 +65,78 @@ export function SiteHeader() {
         </button>
       </div>
     </header>
+  )
+}
+
+function SiteFooter() {
+  return (
+    <footer className="footer">
+      <div className="section-wrap">
+        <div className="footer-top">
+          <div>
+            <Link className="brand brand-light" href="/">
+              Energieberatung Scola
+            </Link>
+            <p>
+              Herstellerneutrale Energieberatung, Förderbegleitung und
+              Energieausweise. Keine Produkt-, Anlagen- oder Handwerksverkäufe.
+            </p>
+          </div>
+
+          <nav className="footer-links" aria-label="Fußnavigation">
+            {NAV_LINKS.map(link => (
+              <Link key={link.href} href={link.href}>
+                {link.label}
+              </Link>
+            ))}
+          </nav>
+
+          <div>
+            <p>
+              Direkter Kontakt:
+              <br />
+              <a href="mailto:kontakt@example.de">kontakt@example.de</a>
+            </p>
+            <p>EEE-gelistet bei der dena.</p>
+          </div>
+        </div>
+
+        <div className="footer-bottom">
+          <span>© {new Date().getFullYear()} Energieberatung Scola</span>
+          <Link href="/rechtliches">Impressum &amp; Datenschutz</Link>
+        </div>
+      </div>
+    </footer>
+  )
+}
+
+type PageIntroProps = {
+  eyebrow: string
+  title: ReactNode
+  children?: ReactNode
+}
+
+export function PageIntro({ eyebrow, title, children }: PageIntroProps) {
+  return (
+    <section className="hero section-wrap" aria-label={eyebrow}>
+      <div className="eyebrow">
+        <span className="eyebrow-dot" aria-hidden="true" />
+        {eyebrow}
+      </div>
+      <div className="section-heading">
+        <h1>{title}</h1>
+        {children && <p>{children}</p>}
+      </div>
+    </section>
+  )
+}
+
+export function PageShell({ children }: { children: ReactNode }) {
+  return (
+    <>
+      <SiteHeader />
+      {children}
+      <SiteFooter />
+    </>
   )
 }
