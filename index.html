@@ -349,9 +349,10 @@ Ihr E-Mail-Programm öffnet sich mit der fertigen Nachricht - Sie versenden selb
 Ich stimme zu, dass meine Angaben zur Kontaktaufnahme verwendet werden. *</label></div>
 </div>
 <p class='form-error' id='form-error' hidden role='alert'></p>
-<button class='button primary' type='submit'>Nachricht vorbereiten und versenden</button>
-<p class='small'>Die Nachricht wird über Ihr eigenes E-Mail-Programm an info@energieberatung-scola.de übergeben.
-Es werden keine Dateien hochgeladen und keine Daten auf dieser Seite gespeichert.</p>
+<button class='button primary' type='submit'>Nachricht senden</button>
+<p class='small'>Die Nachricht wird direkt an info@energieberatung-scola.de gesendet.
+Falls der direkte Versand nicht verfügbar ist, öffnet sich Ihr E-Mail-Programm als Alternative.
+Es werden keine Dateien hochgeladen.</p>
 <div class='result' id='contact-result' hidden aria-live='polite'>
 <strong>Ihr E-Mail-Programm wurde geöffnet.</strong>
 <span>Bitte senden Sie die vorbereitete Nachricht dort ab.</span></div>
@@ -454,6 +455,7 @@ Eine verbindliche Prüfung erfolgt erst persönlich anhand der vollständigen Un
 <script>
 var $=function(id){return document.getElementById(id)};
 var NL=String.fromCharCode(10);
+var ACCESS_KEY='HIER_WEB3FORMS_KEY_EINTRAGEN';
 $('menu').addEventListener('click',function(){
 var open=$('nav-links').classList.toggle('open');
 $('menu').setAttribute('aria-expanded',open)});
@@ -465,6 +467,75 @@ var LIMITS={
 wp:{low:50,mid:100,label:'Wärmepumpe',note:'Bei Wärmepumpen zählt der Stromverbrauch - niedrige Werte sind hier normal.'},
 fw:{low:55,mid:110,label:'Fernwärme',note:'Fernwärme wird je nach Netz anders bewertet.'},
 strom:{low:50,mid:100,label:'Stromheizung',note:'Direktstromheizungen sind meist sehr ineffizient.'},
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 gas:{low:70,mid:160,label:'Gas',note:'Ein Gas-Altbestand liegt oft deutlich über 160 kWh/m²a.'},
 
 
@@ -518,6 +589,32 @@ r.hidden=false;
 var capA=3,capB=4;
 function newCaptcha(){
 capA=1+Math.floor(Math.random()*9);
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 capB=1+Math.floor(Math.random()*9);
 $('captcha-question').textContent='Wie viel ist '+capA+' + '+capB+'?';
 }
@@ -563,10 +660,27 @@ if($('year').value.trim()){lines.push('Baujahr: '+$('year').value.trim())}
 lines.push('','Nachricht:',$('message').value.trim()||'(keine Nachricht)');
 var subject='Anfrage über Website - '+name;
 var mailto='mailto:info@energieberatung-scola.de?subject='+encodeURIComponent(subject)+'&body='+encodeURIComponent(lines.join(NL));
-window.location.href=mailto;
-$('contact-result').hidden=false;
-});
+function fallbackMail(){window.location.href=mailto;$('contact-result').hidden=false;}
+if(!ACCESS_KEY||ACCESS_KEY.indexOf('HIER_')===0){fallbackMail();return}
+var btn=this.querySelector('button[type=submit]');
+if(btn){btn.disabled=true;btn.textContent='Wird gesendet ...'}
+fetch('https://api.web3forms.com/submit',{method:'POST',headers:{'Content-Type':'application/json',Accept:'application/json'},body:JSON.stringify({
+access_key:ACCESS_KEY,subject:subject,from_name:name,
+replyto:email||'',
+message:lines.join(NL)})}).then(function(res){return res.json()}).then(function(d){
+if(d&&d.success){$('contact-result').hidden=false;$('contact-form').reset();newCaptcha();}
+else{fallbackMail()}
+}).catch(function(){fallbackMail()}).then(function(){
+if(btn){btn.disabled=false;btn.textContent='Nachricht senden'}
+});});
+
+
+
+
+
+
 </script>
 </body>
 </html>
+
 
