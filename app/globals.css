@@ -2211,6 +2211,181 @@ button {
     animation-iteration-count: 1 !important;
   }
 }
+/* =========================================================
+   MOBILE FINAL 
+   ========================================================= */
+
+html,
+body {
+  width: 100%;
+  max-width: 100%;
+  overflow-x: hidden;
+}
+
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+.site-header,
+.site-header-inner,
+main,
+section,
+.section-wrap,
+.checker-layout,
+.checker-box,
+.result-box,
+.calculator-grid {
+  min-width: 0;
+  max-width: 100%;
+}
+
+.calculator-grid label {
+  min-width: 0;
+}
+
+.calculator-grid input,
+.calculator-grid select,
+.calculator-grid textarea {
+  width: 100%;
+  max-width: 100%;
+  min-width: 0;
+}
+
+.input-with-unit {
+  display: flex;
+  width: 100%;
+  max-width: 100%;
+  min-width: 0;
+}
+
+.input-with-unit input {
+  min-width: 0;
+  flex: 1 1 auto;
+}
+
+.input-with-unit span {
+  flex: 0 0 auto;
+}
+
+.result-box,
+.side-note,
+.entry-card,
+.home-trust-card {
+  overflow-wrap: anywhere;
+}
+
+.result-actions {
+  min-width: 0;
+}
+
+.result-actions .button {
+  max-width: 100%;
+  white-space: normal;
+}
+
+.funding-result {
+  min-width: 0;
+}
+
+.funding-result strong {
+  display: block;
+  max-width: 100%;
+  font-size: clamp(36px, 11vw, 58px);
+  line-height: 1;
+  overflow-wrap: anywhere;
+}
+
+.funding-meta {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 12px;
+}
+
+.funding-meta > div {
+  min-width: 0;
+}
+
+.funding-meta strong {
+  display: block;
+  overflow-wrap: anywhere;
+}
+
+@media (max-width: 600px) {
+  .section-wrap {
+    padding-left: 16px;
+    padding-right: 16px;
+  }
+
+  .checker-section {
+    width: 100%;
+    overflow: hidden;
+  }
+
+  .checker-box {
+    width: 100%;
+    padding: 16px;
+  }
+
+  .funding-meta {
+    grid-template-columns: 1fr;
+  }
+
+  .funding-result strong {
+    font-size: clamp(38px, 14vw, 54px);
+  }
+
+  .result-actions {
+    display: grid;
+    grid-template-columns: 1fr;
+  }
+
+  .result-actions .button {
+    width: 100%;
+  }
+
+  .step-list {
+    width: 100%;
+    overflow: hidden;
+  }
+
+  .step-list span {
+    white-space: normal;
+  }
+}
+
+@media (max-width: 380px) {
+  .site-header {
+    padding-left: 12px;
+    padding-right: 12px;
+  }
+
+  .site-header-inner {
+    gap: 8px;
+  }
+
+  .brand {
+    min-width: 0;
+    font-size: 15px;
+  }
+
+  .brand > span:last-child {
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+  }
+
+  .mobile-menu-button {
+    width: 44px;
+    height: 44px;
+    flex: 0 0 44px;
+  }
+
+  .checker-box {
+    padding: 14px;
+  }
+}
 
 /* =========================================================
    TAILWIND / THEME INTEGRATION
