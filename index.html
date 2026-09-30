@@ -983,8 +983,13 @@ Welcher Ausweis erforderlich ist, hängt vom Gebäude ab.</p></details>
 <div class='legal-grid'><div><h3>Impressum</h3>
 <p><b>Verantwortlich:</b><br>
 <img src='name-impressum.svg' alt='Name des Verantwortlichen' width='220' height='28'><br>
-Orbweg 1<br>63741 Aschaffenburg</p>
+<img src='address-impressum.svg' alt='Anschrift des Verantwortlichen' width='230' height='22'></p>
 <p>E-Mail: <a href='mailto:info@energieberatung-scola.de'>info@energieberatung-scola.de</a><br>
+
+
+
+
+
 <a href='tel:+4915630101033'>015630 101033</a></p>
 
 
@@ -1011,7 +1016,7 @@ Orbweg 1<br>63741 Aschaffenburg</p>
 <p>Verbraucherstreitbeilegung gemäß § 36 VSBG: Wir sind nicht bereit und nicht verpflichtet,
 an Streitbeilegungsverfahren vor einer Verbraucherschlichtungsstelle teilzunehmen.</p></div>
 <div><h3>Datenschutzerklärung</h3>
-<p><b>Verantwortlicher:</b> Energieberatung Scola, Orbweg 1, 63741 Aschaffenburg.
+<p><b>Verantwortlicher:</b> Energieberatung Scola,<br><img src='address-impressum.svg' alt='Anschrift des Verantwortlichen' width='230' height='22'>.
 Beim Aufruf können Server-Logfiles (IP-Adresse, Zeitpunkt, angeforderte Seite, Browser)
 zur technischen Sicherheit auf Grundlage von Art. 6 Abs. 1 lit. f DSGVO verarbeitet werden.</p>
 
@@ -1110,6 +1115,26 @@ Sie haben Rechte auf Auskunft, Berichtigung, Löschung, Einschränkung der Verar
 Datenübertragbarkeit und Beschwerde bei einer Datenschutzaufsichtsbehörde.</p></div>
 <div><h3>Hinweis zur Nutzung</h3>
 <p>Alle Hinweise sind eine unverbindliche Orientierung. Förderprogramme, Voraussetzungen und Fristen können sich ändern.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
@@ -1416,6 +1441,24 @@ r.hidden=false;
 
 ['energy','heating-age'].forEach(function(id){$(id).addEventListener('change',updateEfficiency)});
 var capA=3,capB=4;
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 function newCaptcha(){
 
 
@@ -1594,6 +1637,17 @@ fetch('https://api.web3forms.com/submit',{method:'POST',headers:{'Content-Type':
 
 
 access_key:ACCESS_KEY,subject:subject,from_name:name,
+
+
+
+
+
+
+
+
+
+
+
 replyto:email||'',
 
 
@@ -1697,6 +1751,7 @@ if(btn){btn.disabled=false;btn.textContent='Nachricht senden'}
 </script>
 </body>
 </html>
+
 
 
 
