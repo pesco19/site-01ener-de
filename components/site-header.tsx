@@ -47,7 +47,7 @@ export function SiteHeader() {
           ))}
         </nav>
 
-        <a className="header-contact" href="mailto:kontakt@example.de">
+        <a className="header-contact" href="mailto:info@energieberatung-scola.de">
           E-Mail schreiben
         </a>
 
@@ -95,9 +95,11 @@ function SiteFooter() {
             <p>
               Direkter Kontakt:
               <br />
-              <a href="mailto:kontakt@example.de">kontakt@example.de</a>
+              <a href="mailto:info@energieberatung-scola.de">info@energieberatung-scola.de</a>
+              <br />
+              <a href="tel:+4915630101033">015630 101033</a>
             </p>
-            <p>EEE-gelistet bei der dena.</p>
+            <p>Unabhängig. Herstellerneutral. Persönlich.</p>
           </div>
         </div>
 
