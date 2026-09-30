@@ -25,13 +25,72 @@ export default function HomePage() {
         </section>
 
         <section className="home-paths section-wrap" aria-labelledby="wege-title">
-          <div className="section-kicker">Ihr nächster Schritt</div>
-          <div className="section-heading"><h2 id="wege-title">Was darf heute<br />klarer werden?</h2><p>Wählen Sie den passenden Einstieg. Die ausführlichen Informationen und Rechner finden Sie jeweils auf einer eigenen Seite.</p></div>
-          <div className="entry-grid">
-            <Link className="entry-card" href="/leistungen"><span className="card-number">A</span><span><strong>Orientierung erhalten</strong><small>Leistungen kennenlernen, Fragen sortieren und den persönlichen nächsten Schritt finden.</small></span><Arrow /></Link>
-            <Link className="entry-card entry-card-accent" href="/rechner"><span className="card-number">B</span><span><strong>Fördercheck starten</strong><small>Vorhaben, Gebäudeart und Beratungswunsch auswählen – vorsichtig und unverbindlich.</small></span><Arrow /></Link>
-          </div>
-        </section>
+  <div className="section-kicker">Womit können wir helfen?</div>
+
+  <div className="section-heading">
+    <h2 id="wege-title">
+      Ihr Vorhaben.<br />
+      Ihr nächster Schritt.
+    </h2>
+
+    <p>
+      Wählen Sie einfach aus, was Sie gerade klären möchten.
+      Sie müssen dafür noch keine Fachbegriffe kennen.
+    </p>
+  </div>
+
+  <div className="entry-grid">
+
+    <Link className="entry-card" href="/rechner">
+      <span className="card-number">01</span>
+      <span>
+        <strong>Förderung prüfen</strong>
+        <small>
+          Sie planen Heizung, Dämmung, Fenster oder eine Sanierung
+          und möchten wissen, welche Fördermöglichkeiten infrage kommen.
+        </small>
+      </span>
+      <Arrow />
+    </Link>
+
+    <Link className="entry-card entry-card-accent" href="/leistungen">
+      <span className="card-number">02</span>
+      <span>
+        <strong>Sanierung planen</strong>
+        <small>
+          Sie möchten Ihr Gebäude Schritt für Schritt energetisch
+          verbessern und brauchen eine unabhängige Einschätzung.
+        </small>
+      </span>
+      <Arrow />
+    </Link>
+
+    <Link className="entry-card" href="/effizienz-rechner">
+      <span className="card-number">03</span>
+      <span>
+        <strong>Energieverbrauch einordnen</strong>
+        <small>
+          Sie möchten Ihren aktuellen Verbrauch grob einschätzen
+          und wissen, ob weiterer Beratungsbedarf besteht.
+        </small>
+      </span>
+      <Arrow />
+    </Link>
+
+    <Link className="entry-card" href="/kontakt">
+      <span className="card-number">04</span>
+      <span>
+        <strong>Persönlich sprechen</strong>
+        <small>
+          Sie wissen noch nicht genau, was Sie brauchen?
+          Dann schildern Sie kurz Ihr Vorhaben.
+        </small>
+      </span>
+      <Arrow />
+    </Link>
+
+  </div>
+</section>
 
         <section className="home-overview light-section" aria-labelledby="overview-title"><div className="section-wrap"><div className="section-kicker">Auf einen Blick</div><div className="section-heading"><h2 id="overview-title">Klar gegliedert.<br />Einfach erreichbar.</h2><p>Leistungen, Fördercheck, Effizienz-Rechner, Kontakt und rechtliche Angaben sind übersichtlich auf eigenen Seiten organisiert.</p></div><div className="overview-links"><Link href="/leistungen"><span>Leistungen</span><small>iSFP, Förderbegleitung und Energieausweise</small><Arrow /></Link><Link href="/effizienz-rechner"><span>Effizienz-Rechner</span><small>Erste Orientierung zum energetischen Zustand</small><Arrow /></Link><Link href="/kontakt"><span>Persönlich anfragen</span><small>Auswahl übernehmen und Gespräch vorbereiten</small><Arrow /></Link></div></div></section>
 
