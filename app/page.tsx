@@ -16,12 +16,11 @@ export default function HomePage() {
               <p className="hero-copy">Herstellerneutral, persönlich und verlässlich – von der ersten Analyse bis zur Förderantragstellung.</p>
               <div className="hero-actions">
                 <Link className="button button-primary" href="/leistungen">Orientierung erhalten <Arrow /></Link>
-                <Link className="button button-secondary" href="/rechner">Fördercheck starten <Arrow /></Link>
+                <Link className="button button-secondary" href="/effizienz-rechner">Verbrauch einordnen <Arrow /></Link>
               </div>
               <div className="direct-contact"><a href="tel:+4915630101033"><Phone /><span><small>Direkt sprechen</small>015630 101033</span></a><a href="mailto:info@energieberatung-scola.de"><span><small>Schreiben Sie uns</small>info@energieberatung-scola.de</span></a></div>
             </div>
-            <aside className="home-trust-card"><span className="card-number">01 / UNABHÄNGIG</span><h2>Eine gute Entscheidung beginnt mit einer unabhängigen Einschätzung.</h2><p>Für Erstkäufer und Hausbesitzer, die ihr Vorhaben verständlich und ohne Verkaufsdruck einordnen möchten.</p></a
-side>
+            <aside className="home-trust-card"><span className="card-number">01 / UNABHÄNGIG</span><h2>Eine gute Entscheidung beginnt mit einer unabhängigen Einschätzung.</h2><p>Für Erstkäufer und Hausbesitzer, die ihr Vorhaben verständlich und ohne Verkaufsdruck einordnen möchten.</p></aside>
           </div>
         </section>
 
@@ -32,15 +31,13 @@ side>
             <p>Wählen Sie einfach aus, was Sie gerade klären möchten. Sie müssen dafür noch keine Fachbegriffe kennen.</p>
           </div>
           <div className="entry-grid">
-            <Link className="entry-card" href="/rechner"><span className="card-number">01</span><span><strong>Förderung prüfen</strong><small>Sie planen Heizung, Dämmung, Fenster oder eine Sanierung und möchten wissen, welche Fördermöglichkeiten infrage kommen.</small></span><Arrow /></Link>
+            <Link className="entry-card" href="/effizienz-rechner"><span className="card-number">01</span><span><strong>Verbrauch einordnen</strong><small>Sie möchten wissen, wie Ihr Energieverbrauch im Vergleich zu Ihrem Heizsystem abschneidet.</small></span><Arrow /></Link>
             <Link className="entry-card entry-card-accent" href="/leistungen"><span className="card-number">02</span><span><strong>Sanierung planen</strong><small>Sie möchten Ihr Gebäude Schritt für Schritt energetisch verbessern und brauchen eine unabhängige Einschätzung.</small></span><Arrow /></Link>
-            <Link className="entry-card" href="/effizienz-rechner"><span className="card-number">03</span><span><strong>Energieverbrauch einordnen</strong><small>Sie möchten Ihren aktuellen Verbrauch grob einschätzen und wissen, ob weiterer Beratungsbedarf besteht.</small></span><Arrow /></Link>
-            <Link className="entry-card" href="/kontakt"><span className="card-number">04</span><span><strong>Persönlich sprechen</strong><small>Sie wissen noch nicht genau, was Sie brauchen? Dann schildern Sie kurz Ihr Vorhaben.</small></span><Arrow /></Link>
+            <Link className="entry-card" href="/kontakt"><span className="card-number">03</span><span><strong>Persönlich sprechen</strong><small>Sie wissen noch nicht genau, was Sie brauchen? Dann schildern Sie kurz Ihr Vorhaben.</small></span><Arrow /></Link>
           </div>
         </section>
 
-        <section className="home-overview light-section" aria-labelledby="overview-title"><div className="section-wrap"><div className="section-kicker">Auf einen Blick</div><div className="section-heading"><h2 id="overview-title">Klar gegliedert.<br />Einfach erreichbar.</h2><p>Leistungen, Fördercheck, Eff
-izienz-Rechner, Kontakt und rechtliche Angaben sind übersichtlich auf eigenen Seiten organisiert.</p></div><div className="overview-links"><Link href="/leistungen"><span>Leistungen</span><small>iSFP, Förderbegleitung und Energieausweise</small><Arrow /></Link><Link href="/effizienz-rechner"><span>Effizienz-Rechner</span><small>Erste Orientierung zum energetischen Zustand</small><Arrow /></Link><Link href="/kontakt"><span>Persönlich anfragen</span><small>Auswahl übernehmen und Gespräch vorbereiten</small><Arrow /></Link></div></div></section>
+        <section className="home-overview light-section" aria-labelledby="overview-title"><div className="section-wrap"><div className="section-kicker">Auf einen Blick</div><div className="section-heading"><h2 id="overview-title">Klar gegliedert.<br />Einfach erreichbar.</h2><p>Leistungen, Effizienz-Rechner, Kontakt und rechtliche Angaben sind übersichtlich auf eigenen Seiten organisiert.</p></div><div className="overview-links"><Link href="/leistungen"><span>Leistungen</span><small>iSFP, Förderbegleitung und Energieausweise</small><Arrow /></Link><Link href="/effizienz-rechner"><span>Effizienz-Rechner</span><small>Erste Orientierung zum energetischen Zustand</small><Arrow /></Link><Link href="/kontakt"><span>Persönlich anfragen</span><small>Vorhaben schildern und Gespräch vorbereiten</small><Arrow /></Link></div></div></section>
 
         <section className="home-note section-wrap"><div className="trust-badge"><span>EEE</span><div><strong>Unabhängig und nachvollziehbar</strong><p>Offiziell gelistet in der Energieeffizienz-Expertenliste der dena.</p><Link href="/rechtliches">Nachweise und Rechtliches ansehen <Arrow /></Link></div></div></section>
       </main>

@@ -5,7 +5,6 @@ import { useState, type ReactNode } from 'react'
 
 const NAV_LINKS = [
   { href: '/leistungen', label: 'Leistungen' },
-  { href: '/rechner', label: 'Förder-Check' },
   { href: '/effizienz-rechner', label: 'Effizienz-Rechner' },
   { href: '/kontakt', label: 'Kontakt' },
   { href: '/rechtliches', label: 'Rechtliches' },
