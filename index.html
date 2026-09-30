@@ -354,8 +354,8 @@ Ich stimme zu, dass meine Angaben zur Kontaktaufnahme verwendet werden. *</label
 Falls der direkte Versand nicht verfügbar ist, öffnet sich Ihr E-Mail-Programm als Alternative.
 Es werden keine Dateien hochgeladen.</p>
 <div class='result' id='contact-result' hidden aria-live='polite'>
-<strong>Ihr E-Mail-Programm wurde geöffnet.</strong>
-<span>Bitte senden Sie die vorbereitete Nachricht dort ab.</span></div>
+<strong>Vielen Dank für Ihre Nachricht!</strong>
+<span>Sie wurde direkt an info@energieberatung-scola.de gesendet. Sie erhalten schnellstmöglich eine Antwort.</span></div>
 </form></div></section>
 <section class='section light' id='faq'><div class='wrap faq'><div class='kicker'>Häufige Fragen</div>
 <h2>Was vorab wichtig ist.</h2>
@@ -363,6 +363,41 @@ Es werden keine Dateien hochgeladen.</p>
 <p class='muted'>Zuerst werden Gebäudezustand, Nutzung und Verbrauch aufgenommen.
 Danach werden sinnvolle Sanierungsschritte geordnet dargestellt.
 Eine mögliche Beratungsförderung wird anhand der aktuellen Voraussetzungen geprüft.</p></details>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 <details><summary>Ist ein Energieeffizienz-Experte verpflichtend?</summary>
 
 
@@ -401,6 +436,58 @@ an Streitbeilegungsverfahren vor einer Verbraucherschlichtungsstelle teilzunehme
 <p><b>Verantwortlicher:</b> Energieberatung Scola, Orbweg 1, 63741 Aschaffenburg.
 Beim Aufruf können Server-Logfiles (IP-Adresse, Zeitpunkt, angeforderte Seite, Browser)
 zur technischen Sicherheit auf Grundlage von Art. 6 Abs. 1 lit. f DSGVO verarbeitet werden.</p>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 <p>Bei Kontaktaufnahme per E-Mail oder Telefon verarbeiten wir Ihre Angaben zur Bearbeitung der Anfrage.
 
 
@@ -466,6 +553,35 @@ $('menu').setAttribute('aria-expanded','false')})});
 var LIMITS={
 wp:{low:50,mid:100,label:'Wärmepumpe',note:'Bei Wärmepumpen zählt der Stromverbrauch - niedrige Werte sind hier normal.'},
 fw:{low:55,mid:110,label:'Fernwärme',note:'Fernwärme wird je nach Netz anders bewertet.'},
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 strom:{low:50,mid:100,label:'Stromheizung',note:'Direktstromheizungen sind meist sehr ineffizient.'},
 
 
@@ -585,6 +701,38 @@ $('eff-hint').textContent=hint;
 r.hidden=false;
 }
 ['area','consumption'].forEach(function(id){$(id).addEventListener('input',updateEfficiency)});
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 ['energy','heating-age'].forEach(function(id){$(id).addEventListener('change',updateEfficiency)});
 var capA=3,capB=4;
 function newCaptcha(){
@@ -660,15 +808,61 @@ if($('year').value.trim()){lines.push('Baujahr: '+$('year').value.trim())}
 lines.push('','Nachricht:',$('message').value.trim()||'(keine Nachricht)');
 var subject='Anfrage über Website - '+name;
 var mailto='mailto:info@energieberatung-scola.de?subject='+encodeURIComponent(subject)+'&body='+encodeURIComponent(lines.join(NL));
-function fallbackMail(){window.location.href=mailto;$('contact-result').hidden=false;}
+function fallbackMail(){window.location.href=mailto;$('contact-result').innerHTML='<strong>Ihr E-Mail-Programm wurde geöffnet.</strong><span>Bitte senden Sie die vorbereitete Nachricht dort ab.</span>';$('contact-result').hidden=false;}
 if(!ACCESS_KEY||ACCESS_KEY.indexOf('HIER_')===0){fallbackMail();return}
 var btn=this.querySelector('button[type=submit]');
 if(btn){btn.disabled=true;btn.textContent='Wird gesendet ...'}
 fetch('https://api.web3forms.com/submit',{method:'POST',headers:{'Content-Type':'application/json',Accept:'application/json'},body:JSON.stringify({
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 access_key:ACCESS_KEY,subject:subject,from_name:name,
 replyto:email||'',
 message:lines.join(NL)})}).then(function(res){return res.json()}).then(function(d){
-if(d&&d.success){$('contact-result').hidden=false;$('contact-form').reset();newCaptcha();}
+if(d&&d.success){$('contact-result').innerHTML='<strong>Vielen Dank für Ihre Nachricht!</strong><span>Sie wurde direkt an info@energieberatung-scola.de gesendet. Sie erhalten schnellstmöglich eine Antwort.</span>';$('contact-result').hidden=false;$('contact-form').reset();newCaptcha();$('contact-result').scrollIntoView({behavior:'smooth'});}
 else{fallbackMail()}
 }).catch(function(){fallbackMail()}).then(function(){
 if(btn){btn.disabled=false;btn.textContent='Nachricht senden'}
@@ -687,6 +881,7 @@ if(btn){btn.disabled=false;btn.textContent='Nachricht senden'}
 </script>
 </body>
 </html>
+
 
 
 
