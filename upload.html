@@ -259,6 +259,7 @@ button,a{touch-action:manipulation}
 
 
 
+
 .nav-links a:hover,.nav-links a:focus{color:var(--green);text-decoration:underline}
 .menu{display:none;border:1px solid var(--line);background:var(--white);border-radius:8px;padding:8px 12px}
 .hero{padding:92px 0 76px}
@@ -358,6 +359,7 @@ text-decoration:none;font-weight:800;border:1px solid var(--green);cursor:pointe
 .section.light{background:#edf3ef}
 .section h2{font-size:clamp(2rem,4vw,3.5rem);line-height:1.05;letter-spacing:-.05em;margin:12px 0 20px}
 .section-intro{max-width:700px;color:var(--muted)}
+
 
 
 
@@ -579,6 +581,7 @@ text-decoration:none;font-weight:800;border:1px solid var(--green);cursor:pointe
 .legal h3{margin-bottom:4px}
 .legal p{color:var(--muted);margin-top:4px}
 .footer{border-top:1px solid var(--line);padding:44px 0 0;background:var(--white)}
+
 
 
 
@@ -1155,6 +1158,7 @@ padding:16px 14px;flex-direction:column;align-items:stretch}
 
 
 
+
 .hero h1{font-size:clamp(2.1rem,9.5vw,3.4rem);letter-spacing:-.04em}.section{padding:44px 0}.section h2{font-size:clamp(1.7rem,6.5vw,2.4rem)}.section-intro{font-size:1rem}.calculator{padding:18px}
 
 .fields{grid-template-columns:1fr;gap:14px}.field.full{grid-column:auto}.actions{flex-direction:column;align-items:stretch}.button{width:100%;min-height:52px;font-size:1.05rem}
@@ -1222,6 +1226,7 @@ padding:16px 14px;flex-direction:column;align-items:stretch}
 .card .number{color:var(--warm)}
 
 .hero-card .number{color:var(--accent)}
+
 
 
 
@@ -1458,6 +1463,7 @@ input[type=file]{display:none}
 <section class='section'>
 <div class='wrap' style='max-width:720px'>
 <div class='kicker'>Terminvorbereitung</div>
+
 
 
 
@@ -1833,7 +1839,8 @@ input[type=file]{display:none}
 
 
 
-<p class='hint' style='margin:8px 0 0'>Ihre Dateien werden per verschlüsselter Verbindung über einen externen Dienst (File.io) gespeichert und selbstständig nach 14 Tagen automatisch gelöscht. Ich erhalte einen geschützten Download-Link. Die Daten werden ausschließlich zur Vorbereitung unseres Beratungstermins verwendet, nach Abschluss der Beratung gelöscht und nicht an Dritte weitergegeben. Siehe <a href='impressum.html'>Impressum &amp; Datenschutz</a>.</p>
+
+<p class='hint' style='margin:8px 0 0'>Ihre Dateien werden per verschlüsselter Verbindung über einen externen Dienst (GoFile) gespeichert und automatisch gelöscht, wenn sie 10 Tage nicht abgerufen wurden. Ich erhalte einen geschützten Download-Link. Die Daten werden ausschließlich zur Vorbereitung unseres Beratungstermins verwendet, nach Abschluss der Beratung gelöscht und nicht an Dritte weitergegeben. Siehe <a href='impressum.html'>Impressum &amp; Datenschutz</a>.</p>
 </div>
 </div>
 </section>
@@ -1916,29 +1923,40 @@ var files=[];
 function el(id){return document.getElementById(id)}
 function setStatus(t){var s=el('status');if(s)s.textContent=t}
 function addFiles(fl){
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 for(var i=0;i<fl.length;i++){
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 var f=fl[i];
 if(f.size>5*1024*1024){setStatus('Zu gross: '+f.name+' (max. 5 MB)');continue}
 files.push(f);
@@ -1961,12 +1979,20 @@ d.appendChild(s);d.appendChild(b);
 list.appendChild(d);
 });
 }
-function uploadOne(f){
+function pickServer(){
+return fetch('https://api.gofile.io/servers').then(function(r){return r.json()}).then(function(j){
+var sv=(j.data&&j.data.servers)||[];
+for(var i=0;i<sv.length;i++){if(sv[i].zone==='eu')return sv[i].name}
+if(sv.length)return sv[0].name;
+return 'store1';
+}).catch(function(){return 'store1'});
+}
+function uploadOne(server,f){
 var fd=new FormData();
 fd.append('file',f,f.name);
-return fetch('https://file.io/?expires=14d',{method:'POST',body:fd}).then(function(r){return r.json()}).then(function(j){
-if(!j.success||!j.link)throw new Error('upload failed');
-return j.link;
+return fetch('https://'+server+'.gofile.io/uploadFile',{method:'POST',body:fd}).then(function(r){return r.json()}).then(function(j){
+if(j.status!=='ok'||!(j.data&&j.data.downloadPage))throw new Error('upload failed');
+return j.data.downloadPage;
 });
 }
 function init(){
@@ -1979,73 +2005,86 @@ drop.addEventListener('drop',function(e){e.preventDefault();drop.classList.remov
 input.addEventListener('change',function(){addFiles(input.files)});
 el('upload-form').addEventListener('submit',function(e){
 e.preventDefault();
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 if(files.length===0){setStatus('Bitte mindestens eine Datei auswaehlen.');return}
 setStatus('Lade Dateien hoch... (1 von '+files.length+')');
 var links=[];
+pickServer().then(function(server){
 var chain=Promise.resolve();
 files.forEach(function(f,idx){
 chain=chain.then(function(){
 setStatus('Lade Dateien hoch... ('+(idx+1)+' von '+files.length+')');
-return uploadOne(f).then(function(link){links.push(f.name+': '+link)});
+return uploadOne(server,f).then(function(link){links.push(f.name+': '+link)});
 });
 });
-chain.then(function(){
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+return chain;
+}).then(function(){
 setStatus('Sende Benachrichtigung...');
 var fd=new FormData();
 fd.append('access_key',ACCESS_KEY);
