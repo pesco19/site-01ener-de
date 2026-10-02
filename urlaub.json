@@ -1,0 +1,6 @@
+{
+  "aktiv": false,
+  "text": "Ich bin derzeit im Urlaub - Ihre Anfrage beantworte ich gerne nach meiner Rueckkehr. Termine koennen Sie bereits jetzt online buchen.",
+  "bis": "",
+  "_anleitung": "Urlaub einschalten: aktiv auf true aendern. Ausschalten: aktiv auf false. text: Hinweistext in Anfuehrungszeichen. bis: optionales Enddatum im Format JJJJ-MM-TT - danach verschwindet das Banner automatisch."
+}
