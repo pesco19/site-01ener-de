@@ -258,6 +258,7 @@ button,a{touch-action:manipulation}
 
 
 
+
 .nav-links a:hover,.nav-links a:focus{color:var(--green);text-decoration:underline}
 .menu{display:none;border:1px solid var(--line);background:var(--white);border-radius:8px;padding:8px 12px}
 .hero{padding:92px 0 76px}
@@ -357,6 +358,7 @@ text-decoration:none;font-weight:800;border:1px solid var(--green);cursor:pointe
 .section.light{background:#edf3ef}
 .section h2{font-size:clamp(2rem,4vw,3.5rem);line-height:1.05;letter-spacing:-.05em;margin:12px 0 20px}
 .section-intro{max-width:700px;color:var(--muted)}
+
 
 
 
@@ -577,6 +579,7 @@ text-decoration:none;font-weight:800;border:1px solid var(--green);cursor:pointe
 .legal h3{margin-bottom:4px}
 .legal p{color:var(--muted);margin-top:4px}
 .footer{border-top:1px solid var(--line);padding:44px 0 0;background:var(--white)}
+
 
 
 
@@ -1151,6 +1154,7 @@ padding:16px 14px;flex-direction:column;align-items:stretch}
 
 
 
+
 .hero h1{font-size:clamp(2.1rem,9.5vw,3.4rem);letter-spacing:-.04em}.section{padding:44px 0}.section h2{font-size:clamp(1.7rem,6.5vw,2.4rem)}.section-intro{font-size:1rem}.calculator{padding:18px}
 
 .fields{grid-template-columns:1fr;gap:14px}.field.full{grid-column:auto}.actions{flex-direction:column;align-items:stretch}.button{width:100%;min-height:52px;font-size:1.05rem}
@@ -1218,6 +1222,7 @@ padding:16px 14px;flex-direction:column;align-items:stretch}
 .card .number{color:var(--warm)}
 
 .hero-card .number{color:var(--accent)}
+
 
 
 
@@ -1501,6 +1506,7 @@ input[type=file]{display:none}
 
 
 
+
 <h1>Unterlagen hochladen</h1>
 <p class='section-intro'>Damit ich mich optimal auf unseren Termin vorbereiten kann, laden Sie hier Ihre Gebäude-Unterlagen hoch. Bitte geben Sie Ihren Namen und das Termin-Datum an, damit ich die Dateien zuordnen kann.</p>
 <form id='upload-form' class='card' style='padding:26px'>
@@ -1520,6 +1526,7 @@ input[type=file]{display:none}
 </form>
 <div class='card' style='padding:20px;margin-top:20px'>
 <strong>Datenschutz</strong>
+
 
 
 
@@ -1903,77 +1910,41 @@ input[type=file]{display:none}
 <a href='impressum.html'>Impressum &amp; Datenschutz</a>
 </div></footer>
 <script>
+(function(){
 var ACCESS_KEY='9642304c-5e7b-47de-91de-d3c23bcbee2f';
 var files=[];
-var drop=document.getElementById('drop');
-var input=document.getElementById('file-input');
-var list=document.getElementById('file-list');
-var status=document.getElementById('status');
-document.getElementById('pick').onclick=function(){input.click()};
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-drop.addEventListener('dragover',function(e){e.preventDefault();drop.classList.add('over')});
-drop.addEventListener('dragleave',function(){drop.classList.remove('over')});
-drop.addEventListener('drop',function(e){e.preventDefault();drop.classList.remove('over');addFiles(e.dataTransfer.files)});
-input.addEventListener('change',function(){addFiles(input.files)});
+function el(id){return document.getElementById(id)}
+function setStatus(t){var s=el('status');if(s)s.textContent=t}
 function addFiles(fl){
 for(var i=0;i<fl.length;i++){
 var f=fl[i];
-if(f.size>10*1024*1024){status.textContent='Zu gross: '+f.name+' (max. 10 MB)';continue}
+if(f.size>10*1024*1024){setStatus('Zu gross: '+f.name+' (max. 10 MB)');continue}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 files.push(f);
 }
 render();
 }
 function render(){
+var list=el('file-list');
 list.innerHTML='';
 files.forEach(function(f,i){
 var d=document.createElement('div');
@@ -1987,20 +1958,30 @@ d.appendChild(s);d.appendChild(b);
 list.appendChild(d);
 });
 }
-document.getElementById('upload-form').addEventListener('submit',function(e){
+function init(){
+var drop=el('drop');
+var input=el('file-input');
+el('pick').onclick=function(){input.click()};
+drop.addEventListener('dragover',function(e){e.preventDefault();drop.classList.add('over')});
+drop.addEventListener('dragleave',function(){drop.classList.remove('over')});
+drop.addEventListener('drop',function(e){e.preventDefault();drop.classList.remove('over');addFiles(e.dataTransfer.files)});
+input.addEventListener('change',function(){addFiles(input.files)});
+el('upload-form').addEventListener('submit',function(e){
 e.preventDefault();
-if(files.length===0){status.textContent='Bitte mindestens eine Datei auswählen.';return}
-if(files.reduce(function(s,f){return s+f.size},0)>30*1024*1024){status.textContent='Insgesamt max. 30 MB - bitte weniger Dateien.';return}
+if(files.length===0){setStatus('Bitte mindestens eine Datei auswaehlen.');return}
+var total=0;files.forEach(function(f){total+=f.size});
+if(total>30*1024*1024){setStatus('Insgesamt max. 30 MB - bitte weniger Dateien.');return}
 var fd=new FormData();
 fd.append('access_key',ACCESS_KEY);
-fd.append('name',document.getElementById('u-name').value);
-fd.append('termin',document.getElementById('u-date').value);
-fd.append('beschreibung',document.getElementById('u-msg').value);
+fd.append('name',el('u-name').value);
+fd.append('termin',el('u-date').value);
+fd.append('beschreibung',el('u-msg').value);
 fd.append('subject','Unterlagen-Upload Terminvorbereitung');
 files.forEach(function(f){fd.append('attachment[]',f)});
-status.textContent='Sende...';
+setStatus('Sende...');
 fetch('https://api.web3forms.com/submit',{method:'POST',body:fd}).then(function(r){return r.json()}).then(function(res){
-if(res.success){status.textContent='Vielen Dank! Ihre Unterlagen sind bei mir eingegangen.';document.getElementById('upload-form').reset();files=[];render()}
+if(res.success){setStatus('Vielen Dank! Ihre Unterlagen sind bei mir eingegangen.');el('upload-form').reset();files=[];render()}
+else{setStatus('Fehler beim Senden - bitte erneut versuchen.')}
 
 
 
@@ -2022,9 +2003,87 @@ if(res.success){status.textContent='Vielen Dank! Ihre Unterlagen sind bei mir ei
 
 
 
-else{status.textContent='Fehler beim Senden - bitte versuchen Sie es erneut.'}
-}).catch(function(){status.textContent='Fehler beim Senden - bitte versuchen Sie es erneut.'});
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+}).catch(function(){setStatus('Fehler beim Senden - bitte erneut versuchen.')});
 });
+}
+if(document.readyState==='loading'){document.addEventListener('DOMContentLoaded',init)}
+else{init()}
+})();
 </script>
 </body>
 </html>
